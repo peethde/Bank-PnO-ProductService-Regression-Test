@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "02db9c21-0323-43ba-a197-715b22466119",
+		"_postman_id": "1531d5e4-a17e-4ec5-88e6-7045d8cfa206",
 		"name": "Jenkins_ProductService_RegressionSuite",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13820,6 +13820,172 @@
 					"raw": "{{baseUrl}}",
 					"host": [
 						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products ADVA notifications_ChatBot",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Get Micorgateway JWT token\r",
+							"pm.sendRequest({\r",
+							"    url: postman.getEnvironmentVariable(\"oauth_url\"),\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        \"Content-Type\":\"application/json\"},\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify({ client_id: postman.getEnvironmentVariable(\"client_id\"), client_secret: postman.getEnvironmentVariable(\"client_secret\"), grant_type: \"client_credentials\"})\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    pm.expect(res).to.have.property('code', 200);\r",
+							"    postman.setEnvironmentVariable(\"Authorization\", res.json().token);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{advaNotificationUrl_ChatBot}}",
+					"host": [
+						"{{advaNotificationUrl_ChatBot}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products ADVA configuration_ChatBot",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// Get Micorgateway JWT token\r",
+							"pm.sendRequest({\r",
+							"    url: postman.getEnvironmentVariable(\"oauth_url\"),\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        \"Content-Type\":\"application/json\"},\r",
+							"    body: {\r",
+							"        mode: 'raw',\r",
+							"        raw: JSON.stringify({ client_id: postman.getEnvironmentVariable(\"client_id\"), client_secret: postman.getEnvironmentVariable(\"client_secret\"), grant_type: \"client_credentials\"})\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    pm.expect(res).to.have.property('code', 200);\r",
+							"    postman.setEnvironmentVariable(\"Authorization\", res.json().token);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "accessToken",
+							"value": "{{Authorization}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{advaConfigurationUrl_ChatBot}}",
+					"host": [
+						"{{advaConfigurationUrl_ChatBot}}"
 					]
 				}
 			},
